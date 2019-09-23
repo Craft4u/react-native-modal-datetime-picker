@@ -37,7 +37,8 @@ export default class CustomDatePickerIOS extends React.PureComponent {
     pickerRefCb: PropTypes.func,
     reactNativeModalPropsIOS: PropTypes.any,
     titleIOS: PropTypes.string,
-    titleStyle: PropTypes.any
+    titleStyle: PropTypes.any,
+    darkTheme: PropTypes.bool
   };
 
   static defaultProps = {
@@ -52,7 +53,8 @@ export default class CustomDatePickerIOS extends React.PureComponent {
     onHideAfterConfirm: () => {},
     onDateChange: () => {},
     reactNativeModalPropsIOS: {},
-    titleIOS: "Pick a date"
+    titleIOS: "Pick a date",
+    darkTheme: false
   };
 
   state = {
@@ -139,6 +141,7 @@ export default class CustomDatePickerIOS extends React.PureComponent {
       reactNativeModalPropsIOS,
       titleIOS,
       titleStyle,
+      darkTheme,
       ...otherProps
     } = this.props;
 
@@ -194,7 +197,9 @@ export default class CustomDatePickerIOS extends React.PureComponent {
         backdropOpacity={0.4}
         {...reactNativeModalProps}
       >
-        <View style={[styles.datepickerContainer, datePickerContainerStyleIOS]}>
+        <View style={[styles.datepickerContainer, datePickerContainerStyleIOS, {
+          backgroundColor: darkTheme ? 'black' : 'white'
+        }]}>
           {!hideTitleContainerIOS &&
             (customTitleContainerIOS || titleContainer)}
           <View
@@ -224,7 +229,9 @@ export default class CustomDatePickerIOS extends React.PureComponent {
         </View>
 
         <TouchableHighlight
-          style={[styles.cancelButton, cancelButtonContainerStyleIOS]}
+          style={[styles.cancelButton, cancelButtonContainerStyleIOS, {
+            backgroundColor: darkTheme ? 'black' : 'white'
+          }]}
           underlayColor={HIGHLIGHT_COLOR}
           onPress={this.handleCancel}
         >
@@ -236,7 +243,6 @@ export default class CustomDatePickerIOS extends React.PureComponent {
 }
 
 const BORDER_RADIUS = 13;
-const BACKGROUND_COLOR = "white";
 const BORDER_COLOR = "#d5d5d5";
 const TITLE_FONT_SIZE = 13;
 const TITLE_COLOR = "#8f8f8f";
@@ -251,7 +257,6 @@ const styles = StyleSheet.create({
     margin: 10
   },
   datepickerContainer: {
-    backgroundColor: BACKGROUND_COLOR,
     borderRadius: BORDER_RADIUS,
     marginBottom: 8,
     overflow: "hidden"
@@ -282,7 +287,6 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent"
   },
   cancelButton: {
-    backgroundColor: BACKGROUND_COLOR,
     borderRadius: BORDER_RADIUS,
     height: 57,
     marginBottom: isIphoneX() ? 20 : 0,
