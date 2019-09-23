@@ -198,7 +198,7 @@ export default class CustomDatePickerIOS extends React.PureComponent {
         {...reactNativeModalProps}
       >
         <View style={[styles.datepickerContainer, datePickerContainerStyleIOS, {
-          backgroundColor: darkTheme ? 'black' : 'white'
+          backgroundColor: darkTheme === 'dark' ? 'black' : 'white'
         }]}>
           {!hideTitleContainerIOS &&
             (customTitleContainerIOS || titleContainer)}
@@ -230,7 +230,7 @@ export default class CustomDatePickerIOS extends React.PureComponent {
 
         <TouchableHighlight
           style={[styles.cancelButton, cancelButtonContainerStyleIOS, {
-            backgroundColor: darkTheme ? 'black' : 'white'
+            backgroundColor: darkTheme === 'dark' ? 'black' : 'white'
           }]}
           underlayColor={HIGHLIGHT_COLOR}
           onPress={this.handleCancel}
